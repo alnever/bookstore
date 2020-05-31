@@ -1,9 +1,8 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { BookCard } from './../components/BookCard'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 
 import { bookIndex } from './../store/selectors/BookSelectors'
-import { BooksFetch } from './../store/actions/BookActions'
 
 const MainContent = () => {
     const books = useSelector(state => bookIndex(state))

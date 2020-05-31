@@ -2,9 +2,8 @@ import React from 'react'
 import { Card, CardImg, CardBody, CardTitle, CardSubtitle, CardText, Button } from 'reactstrap'
 
 export function BookCard(props) {
-    console.log(props)
     return (
-        <Card>
+        <Card className='col-4 align-self-stretch'>
             <CardImg />
             <CardBody>
                 <CardTitle>{props.book.title}</CardTitle>

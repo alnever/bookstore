@@ -1,10 +1,14 @@
 import { createReducer } from './../helpers/CreateReducer'
 
-import { BOOKS_INDEX, BOOKS_REQUEST, BOOKS_RECEIVED } from './../actions/BookActions'
+import { BOOKS_INDEX, BOOKS_REQUEST, BOOKS_RECEIVED, BOOK_EDIT_TOGGLE, BOOK_EDIT } from './../actions/BookActions'
+import { initialBook } from '../models/Book'
 
 const booksInitialState = {
+    isEditing: false,
+    isNew: false,
     isFetching: false,
-    books: []
+    books: [],
+    currentBook: initialBook
 }
 
 
@@ -22,5 +26,19 @@ export const bookReducer = createReducer(booksInitialState,{
             isFetching: false,
             books: action.books
         })
+    },
+    [BOOK_EDIT_TOGGLE]: (state, action) => {
+        return {
+            ...state,
+            isEditing: action.isEditing,
+            isNew: action.isNew,
+            currentBook: action.currentBook
+        }
+    },
+    [BOOK_EDIT]: (state, action) => {
+        return {
+            ...state,
+            currentBook: action.currentBook
+        }
     }
 })
