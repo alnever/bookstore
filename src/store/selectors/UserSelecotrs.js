@@ -1,0 +1,1 @@
+export const isLogged = state => state.users.isLogged

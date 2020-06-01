@@ -7,8 +7,6 @@ import { bookIndex } from './../store/selectors/BookSelectors'
 const MainContent = () => {
     const books = useSelector(state => bookIndex(state))
 
-    console.log(books)
-
     return (
         <div className="d-flex p-2 flex-row flex-wrap">
             {

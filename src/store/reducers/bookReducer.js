@@ -1,6 +1,6 @@
 import { createReducer } from './../helpers/CreateReducer'
 
-import { BOOKS_INDEX, BOOKS_REQUEST, BOOKS_RECEIVED, BOOK_EDIT_TOGGLE, BOOK_EDIT } from './../actions/BookActions'
+import { BOOKS_INDEX, BOOKS_REQUEST, BOOKS_RECEIVED, BOOK_EDIT_TOGGLE, BOOK_EDIT, BOOKS_TOTAL_RECEIVED } from './../actions/BookActions'
 import { initialBook } from '../models/Book'
 
 const booksInitialState = {
@@ -8,7 +8,8 @@ const booksInitialState = {
     isNew: false,
     isFetching: false,
     books: [],
-    currentBook: initialBook
+    currentBook: initialBook,
+    totalBooks: 0
 }
 
 
@@ -40,5 +41,12 @@ export const bookReducer = createReducer(booksInitialState,{
             ...state,
             currentBook: action.currentBook
         }
+    },
+    [BOOKS_TOTAL_RECEIVED]: (state, action) => {
+        return {
+            ...state,
+            totalBooks: action.total
+        }
     }
+
 })

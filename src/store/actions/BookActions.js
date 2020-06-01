@@ -22,14 +22,11 @@ export const BOOKS_FETCH = 'BOOKS_FETCH_ACTION'
 export function BooksFetch() {
     return dispatch => {
 
-        console.log("Start books fetching")
         dispatch(BooksRequest)
 
         return axios.get('http://localhost:8080/books')
             .then(
                 response => { 
-                    console.log('Books are fetched')
-                    console.log(response.data)
                     dispatch(BooksReceived(response.data))
                 }
             )
@@ -56,11 +53,16 @@ export function BookEdit(payload) {
 
 export const BOOK_CREATE = 'BOOK_CREATE_ACTION'
 export function BookCreate(payload) {
-    return dispatch => {
-        console.log(payload)
+    return (dispatch, getState) => {
+        const state = getState()
+        console.log("State in action")
+        console.log(state)
+        
         dispatch(BookEditToggle({isEditing: false, isNew: false, currentBook: initialBook}))
 
-        return axios.post('http://localhost:8080/books', payload)
+        return axios.post('http://localhost:8080/books', payload,{
+            auth: state.users.user
+        })
             .then(
                 dispatch(BooksFetch())
             )
@@ -70,7 +72,6 @@ export function BookCreate(payload) {
 export const BOOK_SAVE = 'BOOK_SAVE_ACTION'
 export function BookSave(payload) {
     return dispatch => {
-        console.log(payload)
         dispatch(BookEditToggle({isEditing: false, isNew: false, currentBook: initialBook}))
 
         return axios.put(`http://localhost:8080/books/${payload.id}`, payload)
@@ -83,8 +84,6 @@ export function BookSave(payload) {
 export const BOOK_DELETE = 'BOOK_DELETE_ACTION'
 export function BookDelete(payload) {
     return dispatch => {
-        console.log(payload)
-
         return axios.delete(`http://localhost:8080/books/${payload.id}`)
             .then(
                 dispatch(BooksFetch())
@@ -92,3 +91,9 @@ export function BookDelete(payload) {
     }
 }
 
+export const BOOKS_TOTAL_RECEIVED = 'BOOKS_TOTAL_RECEIVED_ACTION'
+export function BooksTotal() {
+    return dispatch => {
+
+    }
+} 

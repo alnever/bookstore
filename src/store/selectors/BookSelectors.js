@@ -13,3 +13,7 @@ export const isBookEditing = state => {
 export const isNewBook = state => {
     return state.books.isNew
 } 
+
+export const totalBooks = state => {
+    return state.books.totalBooks
+}
